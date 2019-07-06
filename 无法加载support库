@@ -1,0 +1,61 @@
+出现无法加载Android.support.appcompat-v7:28.+
+原因：自己的android studio SDK平台工具的版本太低
+我们来分析下appcompat-v7:27.+
+
+上面我们查到我们的ｓｄｋ工具版本是２６，这里的远程依赖包的版本是２７，那么我们只需要将把版本减低到和ｓｄｋ工具版本相同就ｏｋ啦！
+
+apply plugin: 'com.android.application'  
+
+android {  
+
+    compileSdkVersion 26　　　　　　　　　／／修改  
+
+    buildToolsVersion "27.0.0"  
+
+    defaultConfig {  
+
+        applicationId "com.example.haha.myapplication"  
+
+        minSdkVersion 19  
+
+        targetSdkVersion 26　　　　　　　　／／修改  
+
+        versionCode 1  
+
+        versionName "1.0"  
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"  
+
+    }  
+
+    buildTypes {  
+
+        release {  
+
+            minifyEnabled false  
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'  
+
+        }  
+
+    }  
+
+}  
+
+  
+
+dependencies {  
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])  
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {  
+
+        exclude group: 'com.android.support', module: 'support-annotations'  
+
+    })  
+
+    compile 'com.android.support:appcompat-v7:26+'　　／／修改  
+
+    testCompile 'junit:junit:4.12'  
+
+}  
